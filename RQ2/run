@@ -1,0 +1,193 @@
+#!/bin/sh
+
+header()
+{
+    LABEL="$1"
+    WIDTH=$(( ${#LABEL} + 10 ))
+
+    printf '%*s\n' "$WIDTH" '' | tr ' ' '='
+    printf '==== %s ====\n' "$LABEL"
+    printf '%*s\n' "$WIDTH" '' | tr ' ' '='
+}
+
+do_run()
+{
+    TMP=$(mktemp)
+    printf 'Command:\n    '
+    printf ' %q' "$@"
+    printf '\n'
+
+    "$@" > "$TMP" 2>&1
+    STATUS="$?"
+    
+    printf 'Output:\n'
+    sed 's/^/    /' "$TMP"
+
+    rm -f "$TMP"
+    return "$STATUS"
+}
+
+if [ "$#" != 3 ]; then
+    echo "Usage: $0 <TPTP_PRELUDE> <TPTP_PLUGIN> <PROGRAM>" >&2
+    exit 1
+fi
+
+TPTP_PRELUDE="$1"
+TPTP_PLUGIN="$2"
+PROGRAM="$3"
+
+###########################################################################
+###########################################################################
+###########################################################################
+
+header "SMT-LIB + Z3"
+
+echo
+echo "[1] ARGUMENT TYPE ENCODING"
+echo
+
+do_run dafny-z3 verify \
+    --boogie /typeEncoding:a \
+    --verification-time-limit 120 \
+    "$PROGRAM"
+
+echo
+echo "[2] PREDICATE TYPE ENCODING"
+echo
+
+do_run dafny-z3 verify \
+    --boogie /typeEncoding:p \
+    --verification-time-limit 120 \
+    "$PROGRAM"
+
+echo
+echo "[3] MONOMORPHIC TYPE ENCODING"
+echo
+
+do_run dafny-z3 verify \
+    --boogie /typeEncoding:m \
+    --verification-time-limit 120 \
+    "$PROGRAM"
+
+echo
+echo
+echo
+
+###########################################################################
+###########################################################################
+###########################################################################
+
+header "SMT-LIB + Vampire"
+
+echo
+echo "[1] ARGUMENT TYPE ENCODING"
+echo
+
+do_run dafny-vampire verify \
+    --prelude "$TPTP_PRELUDE" \
+    --boogie /proverOpt:SOLVER=vampire \
+    --boogie /proverOpt:C:--mode \
+    --boogie /proverOpt:C:casc \
+    --boogie /typeEncoding:a \
+    --verification-time-limit 120 \
+    "$PROGRAM"
+
+echo
+echo "[2] PREDICATE TYPE ENCODING"
+echo
+
+do_run dafny-vampire verify \
+    --prelude "$TPTP_PRELUDE" \
+    --boogie /proverOpt:SOLVER=vampire \
+    --boogie /proverOpt:C:--mode \
+    --boogie /proverOpt:C:casc \
+    --boogie /typeEncoding:p \
+    --verification-time-limit 120 \
+    "$PROGRAM"
+
+echo
+echo "[3] MONOMORPHIC TYPE ENCODING"
+echo
+
+do_run dafny-vampire verify \
+    --prelude "$TPTP_PRELUDE" \
+    --boogie /proverOpt:SOLVER=vampire \
+    --boogie /proverOpt:C:--mode \
+    --boogie /proverOpt:C:casc \
+    --boogie /typeEncoding:m \
+    --boogie /useArrayAxioms \
+    --verification-time-limit 120 \
+    "$PROGRAM"
+
+echo
+echo
+echo
+
+
+###########################################################################
+###########################################################################
+###########################################################################
+
+header "TPTP + Vampire"
+
+echo
+echo "[1] POLYMORPHIC TYPE ENCODING"
+echo
+
+do_run dafny-vampire verify \
+    --prelude "$TPTP_PRELUDE" \
+    --solver-plugin "$TPTP_PLUGIN" \
+    --boogie /proverOpt:SOLVER=vampire \
+    --boogie /proverOpt:C:--mode \
+    --boogie /proverOpt:C:casc \
+    --verification-time-limit 120 \
+    "$PROGRAM"
+
+echo
+echo "[2] ARGUMENT TYPE ENCODING"
+echo
+
+do_run dafny-vampire verify \
+    --prelude "$TPTP_PRELUDE" \
+    --solver-plugin "$TPTP_PLUGIN" \
+    --boogie /proverOpt:SOLVER=vampire \
+    --boogie /proverOpt:C:--mode \
+    --boogie /proverOpt:C:casc \
+    --boogie /proverOpt:ENABLE_TYPE_ERASURE \
+    --boogie /typeEncoding:a \
+    --verification-time-limit 120 \
+    "$PROGRAM"
+
+echo
+echo "[3] PREDICATE TYPE ENCODING"
+echo
+
+do_run dafny-vampire verify \
+    --prelude "$TPTP_PRELUDE" \
+    --solver-plugin "$TPTP_PLUGIN" \
+    --boogie /proverOpt:SOLVER=vampire \
+    --boogie /proverOpt:C:--mode \
+    --boogie /proverOpt:C:casc \
+    --boogie /proverOpt:ENABLE_TYPE_ERASURE \
+    --boogie /typeEncoding:p \
+    --verification-time-limit 120 \
+    "$PROGRAM"
+
+echo
+echo "[4] MONOMORPHIC TYPE ENCODING"
+echo
+
+do_run dafny-vampire verify \
+    --prelude "$TPTP_PRELUDE" \
+    --solver-plugin "$TPTP_PLUGIN" \
+    --boogie /proverOpt:SOLVER=vampire \
+    --boogie /proverOpt:C:--mode \
+    --boogie /proverOpt:C:casc \
+    --boogie /proverOpt:ENABLE_TYPE_ERASURE \
+    --boogie /typeEncoding:m \
+    --verification-time-limit 120 \
+    "$PROGRAM"
+
+echo
+echo
+echo
