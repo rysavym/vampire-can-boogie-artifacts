@@ -54,3 +54,8 @@ The resulting `csv` is written to `stdout`, verification errors are written to `
 Running the entire suite may take up to 60 hours.
 
 The benchmark in the paper was ran with Vampire 5.0.0 and Z3 4.12.1
+
+## Results
+
+The results of the run used for the paper for each individual program is in `results.csv`.
+The R Script `table1.R` can be used to summarize the results in a table.
