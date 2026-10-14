@@ -46,7 +46,7 @@ echo
 echo "[1] ARGUMENT TYPE ENCODING"
 echo
 
-do_run dafny-z3 verify \
+do_run dafny verify \
     --boogie /typeEncoding:a \
     --verification-time-limit 120 \
     "$PROGRAM"
@@ -55,7 +55,7 @@ echo
 echo "[2] PREDICATE TYPE ENCODING"
 echo
 
-do_run dafny-z3 verify \
+do_run dafny verify \
     --boogie /typeEncoding:p \
     --verification-time-limit 120 \
     "$PROGRAM"
@@ -64,7 +64,7 @@ echo
 echo "[3] MONOMORPHIC TYPE ENCODING"
 echo
 
-do_run dafny-z3 verify \
+do_run dafny verify \
     --boogie /typeEncoding:m \
     --verification-time-limit 120 \
     "$PROGRAM"
@@ -83,7 +83,7 @@ echo
 echo "[1] ARGUMENT TYPE ENCODING"
 echo
 
-do_run dafny-vampire verify \
+do_run dafny verify \
     --prelude "$TPTP_PRELUDE" \
     --boogie /proverOpt:SOLVER=vampire \
     --boogie /proverOpt:C:--mode \
@@ -96,7 +96,7 @@ echo
 echo "[2] PREDICATE TYPE ENCODING"
 echo
 
-do_run dafny-vampire verify \
+do_run dafny verify \
     --prelude "$TPTP_PRELUDE" \
     --boogie /proverOpt:SOLVER=vampire \
     --boogie /proverOpt:C:--mode \
@@ -109,7 +109,7 @@ echo
 echo "[3] MONOMORPHIC TYPE ENCODING"
 echo
 
-do_run dafny-vampire verify \
+do_run dafny verify \
     --prelude "$TPTP_PRELUDE" \
     --boogie /proverOpt:SOLVER=vampire \
     --boogie /proverOpt:C:--mode \
@@ -134,10 +134,9 @@ echo
 echo "[1] POLYMORPHIC TYPE ENCODING"
 echo
 
-do_run dafny-vampire verify \
+do_run dafny verify \
     --prelude "$TPTP_PRELUDE" \
     --solver-plugin "$TPTP_PLUGIN" \
-    --boogie /proverOpt:SOLVER=vampire \
     --boogie /proverOpt:C:--mode \
     --boogie /proverOpt:C:casc \
     --verification-time-limit 120 \
@@ -147,10 +146,9 @@ echo
 echo "[2] ARGUMENT TYPE ENCODING"
 echo
 
-do_run dafny-vampire verify \
+do_run dafny verify \
     --prelude "$TPTP_PRELUDE" \
     --solver-plugin "$TPTP_PLUGIN" \
-    --boogie /proverOpt:SOLVER=vampire \
     --boogie /proverOpt:C:--mode \
     --boogie /proverOpt:C:casc \
     --boogie /proverOpt:ENABLE_TYPE_ERASURE \
@@ -162,10 +160,9 @@ echo
 echo "[3] PREDICATE TYPE ENCODING"
 echo
 
-do_run dafny-vampire verify \
+do_run dafny verify \
     --prelude "$TPTP_PRELUDE" \
     --solver-plugin "$TPTP_PLUGIN" \
-    --boogie /proverOpt:SOLVER=vampire \
     --boogie /proverOpt:C:--mode \
     --boogie /proverOpt:C:casc \
     --boogie /proverOpt:ENABLE_TYPE_ERASURE \
@@ -177,10 +174,9 @@ echo
 echo "[4] MONOMORPHIC TYPE ENCODING"
 echo
 
-do_run dafny-vampire verify \
+do_run dafny verify \
     --prelude "$TPTP_PRELUDE" \
     --solver-plugin "$TPTP_PLUGIN" \
-    --boogie /proverOpt:SOLVER=vampire \
     --boogie /proverOpt:C:--mode \
     --boogie /proverOpt:C:casc \
     --boogie /proverOpt:ENABLE_TYPE_ERASURE \

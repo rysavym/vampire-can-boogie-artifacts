@@ -19,7 +19,7 @@ To switch the simplex-based solver for an LRA one, run the program with the `--b
 which will write the verification condition to `vc.smt2`, e.g.
 
 ```sh
-dafny-z3 verify \
+dafny verify \
     --boogie /typeEncoding:a \
     --verification-time-limit 120 \
     --boogie /proverOpt:LOG_FILE=vc.smt2 \

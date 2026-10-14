@@ -52,7 +52,7 @@ PROVER_Z3="z3"
 
 verify_vampire_tptp_polymorphic() 
 {
-    dafny-vampire verify \
+    dafny verify \
         --solver-plugin "$TPTP_PLUGIN" \
         --prelude "$TPTP_PRELUDE" \
         --boogie "/proverOpt:SOLVER=vampire /proverOpt:C:--mode /proverOpt:C:casc /proverOpt:C:-tha /proverOpt:C:on /proverOpt:C:-uwa /proverOpt:C:alasca_main /proverOpt:C:-alasca /proverOpt:C:on" \
@@ -63,7 +63,7 @@ verify_vampire_tptp_polymorphic()
 
 verify_vampire_tptp_arguments() 
 {
-    dafny-vampire verify \
+    dafny verify \
         --solver-plugin "$TPTP_PLUGIN" \
         --prelude "$TPTP_PRELUDE" \
         --boogie "/proverOpt:SOLVER=vampire /proverOpt:C:--mode /proverOpt:C:casc /proverOpt:C:-tha /proverOpt:C:on /proverOpt:C:-uwa /proverOpt:C:alasca_main /proverOpt:C:-alasca /proverOpt:C:on /proverOpt:ENABLE_TYPE_ERASURE /typeEncoding:a" \
@@ -74,7 +74,7 @@ verify_vampire_tptp_arguments()
 
 verify_vampire_tptp_predicates() 
 {
-    dafny-vampire verify \
+    dafny verify \
         --solver-plugin "$TPTP_PLUGIN" \
         --prelude "$TPTP_PRELUDE" \
         --boogie "/proverOpt:SOLVER=vampire /proverOpt:C:--mode /proverOpt:C:casc /proverOpt:C:-tha /proverOpt:C:on /proverOpt:C:-uwa /proverOpt:C:alasca_main /proverOpt:C:-alasca /proverOpt:C:on /proverOpt:ENABLE_TYPE_ERASURE /typeEncoding:p" \
@@ -86,7 +86,7 @@ verify_vampire_tptp_predicates()
 # this requires the Vampire SMT-LIB patch
 verify_vampire_tptp_monomorphic() 
 {
-    dafny-vampire verify \
+    dafny verify \
         --solver-plugin "$TPTP_PLUGIN" \
         --prelude "$TPTP_PRELUDE" \
         --boogie "/proverOpt:SOLVER=vampire /proverOpt:C:--mode /proverOpt:C:casc /proverOpt:C:-tha /proverOpt:C:on /proverOpt:C:-uwa /proverOpt:C:alasca_main /proverOpt:C:-alasca /proverOpt:C:on /proverOpt:ENABLE_TYPE_ERASURE /typeEncoding:m" \
@@ -98,7 +98,7 @@ verify_vampire_tptp_monomorphic()
 # this requires the Vampire SMT-LIB patch
 verify_vampire_smtlib_arguments() 
 {
-    dafny-vampire verify \
+    dafny verify \
         --prelude "$TPTP_PRELUDE" \
         --boogie "/proverOpt:SOLVER=vampire /proverOpt:C:--mode /proverOpt:C:casc /proverOpt:C:-tha /proverOpt:C:on /proverOpt:C:-uwa /proverOpt:C:alasca_main /proverOpt:C:-alasca /proverOpt:C:on /typeEncoding:a" \
         --verification-time-limit "$DAFNY_VERIFICATION_TIME_LIMIT" \
@@ -109,7 +109,7 @@ verify_vampire_smtlib_arguments()
 # this requires the Vampire SMT-LIB patch
 verify_vampire_smtlib_predicates() 
 {
-    dafny-vampire verify \
+    dafny verify \
         --prelude "$TPTP_PRELUDE" \
         --boogie "/proverOpt:SOLVER=vampire /proverOpt:C:--mode /proverOpt:C:casc /proverOpt:C:-tha /proverOpt:C:on /proverOpt:C:-uwa /proverOpt:C:alasca_main /proverOpt:C:-alasca /proverOpt:C:on /typeEncoding:p" \
         --verification-time-limit "$DAFNY_VERIFICATION_TIME_LIMIT" \
@@ -120,7 +120,7 @@ verify_vampire_smtlib_predicates()
 # this requires the Vampire SMT-LIB patch
 verify_vampire_smtlib_monomorphic() 
 {
-    dafny-vampire verify \
+    dafny verify \
         --prelude "$TPTP_PRELUDE" \
         --boogie "/proverOpt:SOLVER=vampire /proverOpt:C:--mode /proverOpt:C:casc /proverOpt:C:-tha /proverOpt:C:on /proverOpt:C:-uwa /proverOpt:C:alasca_main /proverOpt:C:-alasca /proverOpt:C:on /typeEncoding:m /useArrayAxioms" \
         --verification-time-limit "$DAFNY_VERIFICATION_TIME_LIMIT" \
@@ -130,7 +130,7 @@ verify_vampire_smtlib_monomorphic()
 
 verify_z3_smtlib_arguments() 
 {
-    dafny-z3 verify \
+    dafny verify \
         --verification-time-limit "$DAFNY_VERIFICATION_TIME_LIMIT" \
         --boogie "/typeEncoding:a" \
         --allow-warnings \
@@ -139,7 +139,7 @@ verify_z3_smtlib_arguments()
 
 verify_z3_smtlib_predicates() 
 {
-    dafny-z3 verify \
+    dafny verify \
         --verification-time-limit "$DAFNY_VERIFICATION_TIME_LIMIT" \
         --boogie "/typeEncoding:p" \
         --allow-warnings \
@@ -148,7 +148,7 @@ verify_z3_smtlib_predicates()
 
 verify_z3_smtlib_monomorphic() 
 {
-    dafny-z3 verify \
+    dafny verify \
         --verification-time-limit "$DAFNY_VERIFICATION_TIME_LIMIT" \
         --boogie "/typeEncoding:m" \
         --allow-warnings \

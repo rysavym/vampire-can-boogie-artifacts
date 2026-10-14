@@ -47,7 +47,7 @@ $ ./run <Dafny TPTP Prelude> <TPTP Plugin> DafnyBench/dataset/ground_truth
 ```
 
 where the Dafny TPTP Prelude is available [in the root of the Boogie-TPTP project](https://github.com/rysavym/boogie-tptp/blob/main/DafnyTPTPPrelude.bpl),
-and the TPTP plugin is the path to `Boogie.Provers.TPTP.dll` of the `dafny-vampire` installation.
+and the TPTP plugin is the path to `Boogie.Provers.TPTP.dll` of the (patched) `dafny` installation.
 
 The resulting `csv` is written to `stdout`, verification errors are written to `stderr`
 
